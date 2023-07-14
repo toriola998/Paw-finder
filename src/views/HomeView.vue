@@ -1,3 +1,7 @@
 <template>
-  <h1>Hello World</h1>
+  <TheHeader />
 </template>
+
+<script setup>
+import TheHeader from '../components/TheHeader.vue';
+</script>
