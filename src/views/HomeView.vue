@@ -5,5 +5,5 @@
 
 <script setup>
 import TheHeader from '../components/TheHeader.vue'
-import LoadingSpinner from '../components/LoadingSpinner.vue';
+import LoadingSpinner from '../components/LoadingSpinner.vue'
 </script>
