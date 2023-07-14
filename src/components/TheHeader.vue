@@ -23,6 +23,7 @@ import Navbar from './Navbar.vue'
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+  margin-bottom: 4rem;
 }
 
 .home-header::after {

@@ -26,3 +26,7 @@ button {
   --primary: #9f5b2e;
   --light-grey: #f3f3f3;
 }
+
+ul {
+  list-style-type: none;
+}
