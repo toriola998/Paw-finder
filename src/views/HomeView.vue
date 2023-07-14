@@ -4,7 +4,7 @@
     <loading-spinner v-if="fetchingData" />
     <ul class="image-wrapper" v-if="dataList.length > 0">
       <li v-for="(item, index) in dataList" :key="index">
-        <img :src="item" alt="" class="dog-image" />
+        <img :src="item" alt="" class="dog-image" loading="lazy" />
       </li>
     </ul>
   </main>
@@ -31,12 +31,33 @@ onMounted(() => {
 <style scoped>
 .image-wrapper {
   display: grid;
+  justify-content: center;
+  margin: 0 auto;
   row-gap: 1.5rem;
   padding: 0 1rem;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: masonry;
+  max-width: 1300px;
 }
+
 .dog-image {
-  max-width: 100%;
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+@media screen and (min-width: 760px) {
+  .image-wrapper {
+    column-gap: 2rem;
+    grid-template-columns: 43.5% 43.5%;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .image-wrapper {
+    column-gap: 2rem;
+    grid-template-columns: 31.5% 31.5% 31.5%;
+  }
+  .dog-image {
+    height: 500px;
+  }
 }
 </style>
