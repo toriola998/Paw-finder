@@ -18,6 +18,7 @@ button {
   cursor: pointer;
   outline: 0;
   border: 0;
+  background-color: transparent;
 }
 
 :root {
@@ -29,4 +30,9 @@ button {
 
 ul {
   list-style-type: none;
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
 }
