@@ -4,7 +4,9 @@
     <select-dropdown></select-dropdown>
     <ul class="image-wrapper">
       <li v-for="(item, index) in dataList" :key="index">
-        <img :src="item.url" alt="" class="dog-image" loading="lazy" />
+        <router-link :to="`/dog-profile/${item.id}`">
+          <img :src="item.url" alt="" class="dog-image" loading="lazy" />
+        </router-link>
       </li>
     </ul>
   </div>
@@ -14,6 +16,7 @@
 import { onMounted } from 'vue'
 import { useDogDataStore } from '@/stores/index'
 import { storeToRefs } from 'pinia'
+import { RouterLink } from 'vue-router'
 
 import LoadingSpinner from '../components/LoadingSpinner.vue'
 import SelectDropdown from './SelectDropdown.vue'
@@ -40,6 +43,12 @@ onMounted(() => {
   width: 100%;
   height: 400px;
   object-fit: cover;
+  transition: all 0.5s;
+}
+
+.dog-image:hover {
+  cursor: pointer;
+  transform: scale(0.9);
 }
 
 @media screen and (min-width: 760px) {
