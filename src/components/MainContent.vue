@@ -4,7 +4,7 @@
     <select-dropdown></select-dropdown>
     <ul class="image-wrapper">
       <li v-for="(item, index) in dataList" :key="index">
-        <img :src="item" alt="" class="dog-image" loading="lazy" />
+        <img :src="item.url" alt="" class="dog-image" loading="lazy" />
       </li>
     </ul>
   </div>
