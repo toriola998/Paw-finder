@@ -10,6 +10,7 @@ export default api;
 
 export const useDogDataStore = defineStore('dogData', () => {
   let dataList = ref([])
+  const filteredList = ref([])
   const fetchingData = ref(true)
 
   async function getData() {
@@ -24,5 +25,5 @@ export const useDogDataStore = defineStore('dogData', () => {
       fetchingData.value = false
     }
   }
-  return { getData, dataList, fetchingData }
+  return { getData, dataList, fetchingData, filteredList  }
 })

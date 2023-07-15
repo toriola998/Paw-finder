@@ -39,18 +39,25 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import api from '@/stores/index'
+
+import { useDogDataStore } from '@/stores/index'
+import { storeToRefs } from 'pinia'
+
+const store = useDogDataStore()
+const { dataList } = storeToRefs(store)
+const { filteredList } = storeToRefs(store)
+
 const showDropdown = ref(false)
-
-function toggleDropdown() {
-  showDropdown.value = !showDropdown.value
-}
-
 const fetchingData = ref(false)
 const fetchingMessage = ref('Searching list of dog breeds...')
 const breedList = ref([])
 const breed = ref('')
+
+function toggleDropdown() {
+  showDropdown.value = !showDropdown.value
+}
 
 async function getBreedList() {
   try {
@@ -71,6 +78,17 @@ function getBreed(arg) {
   breed.value = arg
   console.log(breed.value)
 }
+
+filteredList.value = computed(() => {
+  if (breed.value) {
+    return dataList.value.filter(item => {
+      return item.breeds.some(breedItem => {
+        return breedItem.name.toLowerCase().includes(breed.value.toLowerCase());
+      });
+    });
+ }
+  return dataList.value;
+})
 
 onMounted(() => {
   getBreedList()
