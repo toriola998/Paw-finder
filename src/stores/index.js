@@ -6,6 +6,7 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
   headers: {'x-api-key': import.meta.env.VITE_SECRET_KEY}
 });
+export default api;
 
 export const useDogDataStore = defineStore('dogData', () => {
   let dataList = ref([])
