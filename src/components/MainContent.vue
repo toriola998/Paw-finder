@@ -1,11 +1,11 @@
 <template>
-  <loading-spinner v-if="fetchingData" />
+  <loading-spinner v-if="fetchingData && dataList.length === 0" />
   <div v-if="dataList.length > 0">
     <select-dropdown></select-dropdown>
     <ul class="image-wrapper">
       <li v-for="(item, index) in dataList" :key="index">
         <router-link :to="`/dog-profile/${item.id}`">
-          <img :src="item.url" alt="" class="dog-image" loading="lazy" />
+          <img :src="item.url" :alt="`A ${item.name} dog`" class="dog-image" loading="lazy" />
         </router-link>
       </li>
     </ul>
