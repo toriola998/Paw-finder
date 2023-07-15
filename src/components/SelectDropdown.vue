@@ -30,9 +30,9 @@
         aria-selected="false"
         v-for="(item, index) in breedList"
         :key="index"
-        @click="getBreed(item)"
+        @click="getBreed(item.name)"
       >
-        {{ item }}
+        {{ item.name }}
       </li>
     </ul>
   </div>
@@ -40,6 +40,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import api from '@/stores/index'
 const showDropdown = ref(false)
 
 function toggleDropdown() {
@@ -47,37 +48,23 @@ function toggleDropdown() {
 }
 
 const fetchingData = ref(false)
-const fetchingMessage = ref('')
+const fetchingMessage = ref('Searching list of dog breeds...')
 const breedList = ref([])
 const breed = ref('')
 
-function getBreedList() {
-  fetch('https://dog.ceo/api/breeds/list/all')
-    .then((res) => {
-      if (res.status === 200) {
-        return res.json()
-      } else {
-        fetchingMessage.value = 'Failed to get breeds'
-      }
-    })
-    .then((data) => {
-      let responseObject = data.message
-      for (const key in responseObject) {
-        if (Array.isArray(responseObject[key])) {
-          // Push the keys into the new array
-          breedList.value.push(key)
-        }
-      }
-      console.log(breedList.value)
-      fetchingMessage.value = 'Search dogs by breed'
-    })
-    .catch((err) => {
-      console.log(err)
-      fetchingMessage.value = 'Failed to get breeds'
-    })
-    .finally(() => {
-      fetchingData.value = false
-    })
+async function getBreedList() {
+  try {
+    const response = await api.get('/breeds');
+    console.log(response);
+    fetchingMessage.value = 'Search dogs by breed'
+    breedList.value = response.data
+  } catch (error) {
+    console.error(error);
+    
+    fetchingMessage.value = 'Failed to get breeds'
+  } finally {
+    fetchingData.value = false
+  }
 }
 
 function getBreed(arg) {
