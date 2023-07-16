@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
-
+import { useLocalStorage } from '@vueuse/core'
 const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
   headers: { 'x-api-key': import.meta.env.VITE_SECRET_KEY }
@@ -9,7 +9,9 @@ const api = axios.create({
 export default api
 
 export const useDogDataStore = defineStore('dogData', () => {
-  let dataList = ref([])
+
+  let dataList = ref(useLocalStorage('dataList', []))
+
   const filteredList = ref([])
   const fetchingData = ref(true)
 
