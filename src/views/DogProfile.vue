@@ -6,7 +6,14 @@
       Back
     </button>
     <div>
-      <img :src="dog.url" alt="`A ${dog.name} dog`" class="dog-image" />
+      <div>
+        <img :src="dog.url" alt="`A ${dog.name} dog`" class="dog-image" />
+        <div class="btn-wrapper">
+          <button>Cartoonify</button>
+          <button>Grayscale</button>
+          <button>Sepia</button>
+        </div>
+      </div>
 
       <div>
         <p>
@@ -178,6 +185,36 @@ const [lowerWeight, upperWeight] = weightRangeInInches.split('-').map((value) =>
   font-size: 0.9rem;
   font-weight: 600;
   margin-right: 0.5rem;
+}
+
+.btn-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn-wrapper button{
+  padding: .7rem 2.3rem;
+  border-radius: 5px;
+  transition: all .5s;
+  color: var(--light);
+}
+
+.btn-wrapper button:hover{
+ transform: scale(0.93);
+}
+
+.btn-wrapper button:nth-child(2) {
+  background-color: var(--primary);
+}
+
+.btn-wrapper button:nth-child(1) {
+  background-color: var(--blue);
+}
+
+.btn-wrapper button:nth-child(3) {
+  background-color: var(--dark);
 }
 
 @media screen and (min-width: 760px) {
