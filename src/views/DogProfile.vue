@@ -17,6 +17,10 @@
           <button>Cartoonify</button>
           <button @click="applyGrayscale()">Grayscale</button>
           <button @click="applySepia()">Sepia</button>
+          <button @click="reset()">
+            <img src="@/assets/images/icon-reset.png" alt="Reset image effects" width="25" />
+            Reset
+          </button>
         </div>
       </div>
 
@@ -167,6 +171,10 @@ function applySepia() {
   isSepia.value = true
 }
 
+function reset() {
+  isGray.value = false
+  isSepia.value = false
+}
 const weightRangeInInches = dogWeightInInches.value
 const [lowerWeight, upperWeight] = weightRangeInInches.split('-').map((value) => value.trim())
 </script>
@@ -228,6 +236,9 @@ const [lowerWeight, upperWeight] = weightRangeInInches.split('-').map((value) =>
 
 .btn-wrapper button {
   padding: 0.7rem 2.3rem;
+  display: flex;
+  align-items: center;
+  height: 3rem;
   border-radius: 5px;
   transition: all 0.5s;
   color: var(--light);
@@ -246,6 +257,10 @@ const [lowerWeight, upperWeight] = weightRangeInInches.split('-').map((value) =>
 }
 
 .btn-wrapper button:nth-child(3) {
+  background-color: #b76082;
+}
+
+.btn-wrapper button:nth-child(4) {
   background-color: var(--dark);
 }
 
