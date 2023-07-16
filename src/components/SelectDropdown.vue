@@ -9,7 +9,9 @@
       aria-controls="custom-dropdown-options"
       @click="toggleDropdown"
     >
-      <span>{{ fetchingMessage }}</span>
+      <span v-if="breedList?.length === 0">Searching list of dog breeds...</span>
+      <span v-else-if="breed">{{ breed }}</span>
+      <span v-else>{{ fetchingMessage }}</span>
       <img
         src="@/assets/images/icon-dropdown.png"
         alt=""
@@ -30,6 +32,7 @@
         aria-selected="false"
         v-for="(item, index) in breedList"
         :key="index"
+        :class="{'active-breed': item.name === breed}"
         @click="getBreed(item.name)"
       >
         {{ item.name }}
@@ -39,7 +42,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import api from '@/stores/index'
 
 import { useDogDataStore } from '@/stores/index'
@@ -47,16 +50,19 @@ import { storeToRefs } from 'pinia'
 
 const store = useDogDataStore()
 const { dataList } = storeToRefs(store)
-const { filteredList } = storeToRefs(store)
+const { breedList } = storeToRefs(store)
 
 const showDropdown = ref(false)
 const fetchingData = ref(false)
 const fetchingMessage = ref('Searching list of dog breeds...')
-const breedList = ref([])
+
 const breed = ref('')
 
 function toggleDropdown() {
   showDropdown.value = !showDropdown.value
+  if (!breedList) {
+    return
+  }
 }
 
 async function getBreedList() {
@@ -75,21 +81,23 @@ async function getBreedList() {
 }
 
 function getBreed(arg) {
+  showDropdown.value = false
   breed.value = arg
   console.log(breed.value)
+  searchBreed()
 }
 
-filteredList.value = computed(() => {
-  if (breed.value) {
-    return dataList.value.filter((item) => {
-      return item.breeds.some((breedItem) => {
-        return breedItem.name.toLowerCase().includes(breed.value.toLowerCase())
-      })
+const searchResults = ref([])
+function searchBreed() {
+  searchResults.value = dataList.value.filter((item) => {
+    return item.breeds.some((breedItem) => {
+      return breedItem.name.toLowerCase().includes(breed.value.toLowerCase())
     })
-  }
-  return dataList.value
-})
+  })
 
+  dataList.value = searchResults.value
+  console.log(dataList.value)
+}
 onMounted(() => {
   getBreedList()
 })
@@ -124,6 +132,10 @@ onMounted(() => {
 .custom-dropdown ul li:hover {
   background-color: var(--light-grey);
   cursor: pointer;
+}
+
+.active-breed {
+  background-color: var(--light-grey);
 }
 
 .custom-dropdown button {

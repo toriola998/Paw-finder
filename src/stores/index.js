@@ -9,10 +9,9 @@ const api = axios.create({
 export default api
 
 export const useDogDataStore = defineStore('dogData', () => {
-
   let dataList = ref(useLocalStorage('dataList', []))
+  let breedList = ref(useLocalStorage('breedList', []))
 
-  const filteredList = ref([])
   const fetchingData = ref(true)
 
   async function getData() {
@@ -27,5 +26,5 @@ export const useDogDataStore = defineStore('dogData', () => {
       fetchingData.value = false
     }
   }
-  return { getData, dataList, fetchingData, filteredList }
+  return { getData, dataList, fetchingData, breedList }
 })
