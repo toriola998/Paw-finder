@@ -7,11 +7,16 @@
     </button>
     <div>
       <div>
-        <img :src="dog.url" alt="`A ${dog.name} dog`" class="dog-image" />
+        <img
+          :src="dog.url"
+          :alt="`A ${dog.name} dog`"
+          class="dog-image"
+          :class="{ gray: isGray, sepia: isSepia }"
+        />
         <div class="btn-wrapper">
           <button>Cartoonify</button>
-          <button>Grayscale</button>
-          <button>Sepia</button>
+          <button @click="applyGrayscale()">Grayscale</button>
+          <button @click="applySepia()">Sepia</button>
         </div>
       </div>
 
@@ -55,7 +60,7 @@
 
 <script setup>
 import Navbar from '../components/Navbar.vue'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useDogDataStore } from '@/stores/index'
 import { storeToRefs } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'
@@ -145,6 +150,23 @@ const dogWeightInInches = computed(() => {
     .join(', ')
 })
 
+const isGray = ref(false)
+const isSepia = ref(false)
+
+function applyGrayscale() {
+  if (isSepia.value === true) {
+    isSepia.value = false
+  }
+  isGray.value = true
+}
+
+function applySepia() {
+  if (isGray.value === true) {
+    isGray.value = false
+  }
+  isSepia.value = true
+}
+
 const weightRangeInInches = dogWeightInInches.value
 const [lowerWeight, upperWeight] = weightRangeInInches.split('-').map((value) => value.trim())
 </script>
@@ -164,9 +186,19 @@ const [lowerWeight, upperWeight] = weightRangeInInches.split('-').map((value) =>
 .dog-profile {
   padding: 2rem 1rem 10rem;
 }
+
+.gray {
+  filter: grayscale(100);
+}
+
+.sepia {
+  filter: sepia(100%);
+}
+
 .dog-profile .dog-image {
   width: 100%;
   border-radius: 5px;
+
   /* height: auto;
   max-height: 400px;
   object-fit: cover; */
@@ -194,15 +226,15 @@ const [lowerWeight, upperWeight] = weightRangeInInches.split('-').map((value) =>
   margin-top: 2rem;
 }
 
-.btn-wrapper button{
-  padding: .7rem 2.3rem;
+.btn-wrapper button {
+  padding: 0.7rem 2.3rem;
   border-radius: 5px;
-  transition: all .5s;
+  transition: all 0.5s;
   color: var(--light);
 }
 
-.btn-wrapper button:hover{
- transform: scale(0.93);
+.btn-wrapper button:hover {
+  transform: scale(0.93);
 }
 
 .btn-wrapper button:nth-child(2) {
