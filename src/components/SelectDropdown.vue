@@ -70,11 +70,11 @@ function toggleDropdown() {
 async function getBreedList() {
   try {
     const response = await api.get('/breeds')
-    console.log(response)
+    //console.log(response)
     fetchingMessage.value = 'Search dogs by breed'
     breedList.value = response.data
   } catch (error) {
-    console.error(error)
+    //console.error(error)
     fetchingMessage.value = 'Failed to get breeds'
   } finally {
     fetchingData.value = false
@@ -84,7 +84,7 @@ async function getBreedList() {
 function getBreed(arg) {
   showDropdown.value = false
   breed.value = arg
-  console.log(breed.value)
+  //console.log(breed.value)
   searchBreed()
 }
 
@@ -101,7 +101,7 @@ function searchBreed() {
   } else {
     dataList.value = searchResults.value
   }
-  console.log(dataList.value)
+  //console.log(dataList.value)
 }
 onMounted(() => {
   getBreedList()
