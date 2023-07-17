@@ -11,6 +11,7 @@ export default api
 export const useDogDataStore = defineStore('dogData', () => {
   let dataList = ref(useLocalStorage('dataList', []))
   let breedList = ref(useLocalStorage('breedList', []))
+  let duplicateDataList = ref(useLocalStorage('duplicateDataList', []))
 
   const fetchingData = ref(true)
   const errorNote = ref('')
@@ -20,6 +21,7 @@ export const useDogDataStore = defineStore('dogData', () => {
     try {
       const response = await api.get('/images/search?&order=ASC&limit=100')
       dataList.value = response.data
+      duplicateDataList.value = response.data
       console.log(dataList.value)
     } catch (error) {
       console.error(error)
@@ -28,5 +30,5 @@ export const useDogDataStore = defineStore('dogData', () => {
       fetchingData.value = false
     }
   }
-  return { getData, dataList, fetchingData, breedList, errorNote }
+  return { getData, dataList, fetchingData, breedList, errorNote, duplicateDataList }
 })
