@@ -25,7 +25,7 @@ export const useDogDataStore = defineStore('dogData', () => {
       //console.log(dataList.value)
     } catch (error) {
       //console.error(error)
-      errorNote.value = 'Oops! Something seems wrong, reload or try again.'
+      errorNote.value = 'Oops! Something seems wrong, reload or try again later.'
     } finally {
       fetchingData.value = false
     }
