@@ -22,15 +22,18 @@ import EmptyState from './EmptyState.vue'
 import { onMounted } from 'vue'
 import { useDogDataStore } from '@/stores/index'
 import { storeToRefs } from 'pinia'
-import { RouterLink } from 'vue-router'
+import { RouterLink} from 'vue-router'
+import { useRouter } from 'vue-router'
 
 import LoadingSpinner from '../components/LoadingSpinner.vue'
 import SelectDropdown from './SelectDropdown.vue'
 
+const router = useRouter()
 const store = useDogDataStore()
 const { getData } = store
 const { errorNote } = storeToRefs(store)
 const { dataList } = storeToRefs(store)
+const { duplicateDataList } = storeToRefs(store)
 const { fetchingData } = storeToRefs(store)
 
 onMounted(() => {
@@ -38,7 +41,8 @@ onMounted(() => {
 })
 
 function returnHome() {
-  return dataList
+  dataList.value = duplicateDataList.value;
+  router.go(0)
 }
 </script>
 
