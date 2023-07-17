@@ -22,9 +22,9 @@ export const useDogDataStore = defineStore('dogData', () => {
       const response = await api.get('/images/search?&order=ASC&limit=100')
       dataList.value = response.data
       duplicateDataList.value = response.data
-      console.log(dataList.value)
+      //console.log(dataList.value)
     } catch (error) {
-      console.error(error)
+      //console.error(error)
       errorNote.value = 'Oops! Something seems wrong, reload or try again.'
     } finally {
       fetchingData.value = false
