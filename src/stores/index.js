@@ -24,7 +24,6 @@ export const useDogDataStore = defineStore('dogData', () => {
     } catch (error) {
       console.error(error)
       errorNote.value = 'Oops! Something seems wrong, reload or try again.'
-      errorImage.value = 'icon-error.png'
     } finally {
       fetchingData.value = false
     }

@@ -96,11 +96,12 @@ function searchBreed() {
     })
   })
 
-  dataList.value = searchResults.value
-  console.log(dataList.value)
-  if (dataList.value.length === 0) {
+  if (searchResults.value.length === 0) {
     errorNote.value = 'Oops! No result found for the breed you searched for.'
+  }else {
+    dataList.value = searchResults.value
   }
+  console.log(dataList.value)
 }
 onMounted(() => {
   getBreedList()
@@ -150,6 +151,26 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--primary); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-1); 
 }
 
 @media screen and (min-width: 700px) {
