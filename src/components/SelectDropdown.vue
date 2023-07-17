@@ -31,6 +31,15 @@
       <li
         role="option"
         aria-selected="false"
+        @click="getAllBreeds()"
+        class="get-all"
+        :class="{ 'active-breed': dataList.length === duplicateDataList.length }"
+      >
+        All
+      </li>
+      <li
+        role="option"
+        aria-selected="false"
         v-for="(item, index) in breedList"
         :key="index"
         :class="{ 'active-breed': item.name === breed }"
@@ -57,6 +66,7 @@ const { errorNote } = storeToRefs(store)
 const showDropdown = ref(false)
 const fetchingData = ref(false)
 const fetchingMessage = ref('Searching list of dog breeds...')
+const { duplicateDataList } = storeToRefs(store)
 
 const breed = ref('')
 
@@ -102,6 +112,12 @@ function searchBreed() {
     dataList.value = searchResults.value
   }
   //console.log(dataList.value)
+}
+
+function getAllBreeds() {
+  dataList.value = duplicateDataList.value
+  showDropdown.value = false
+  breed.value = 'All'
 }
 onMounted(() => {
   getBreedList()
