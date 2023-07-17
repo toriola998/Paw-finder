@@ -47,6 +47,7 @@ ul {
   height: 3rem;
   border-radius: 5px;
   transition: all 0.5s;
+  font-size: .9rem;
   color: var(--light);
 }
 .btn:hover {

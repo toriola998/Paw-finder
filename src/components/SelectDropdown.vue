@@ -149,6 +149,7 @@ onMounted(() => {
   width: 100%;
   padding: 1rem;
   display: flex;
+  font-size: .9rem;
   justify-content: space-between;
   align-items: center;
   color: var(--dark);
