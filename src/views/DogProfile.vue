@@ -14,7 +14,8 @@
           :class="{ gray: isGray, sepia: isSepia }"
         />
         <div class="btn-wrapper">
-          <button class="btn">Cartoonify</button>
+          <!--Cloudinary transformation docs <<< -->
+          <!-- <button class="btn">Cartoonify</button> -->
           <button @click="applyGrayscale()" class="btn">Grayscale</button>
           <button @click="applySepia()" class="btn">Sepia</button>
           <button @click="reset()" class="btn">
@@ -244,12 +245,12 @@ const [lowerWeight, upperWeight] = weightRangeInInches.split('-').map((value) =>
 }
 
 .btn-wrapper button:nth-child(3) {
-  background-color: #b76082;
-}
-
-.btn-wrapper button:nth-child(4) {
   background-color: var(--dark);
 }
+
+/* .btn-wrapper button:nth-child(4) {
+  background-color: var(--dark);
+} */
 
 @media screen and (min-width: 760px) {
   .dog-profile div {
