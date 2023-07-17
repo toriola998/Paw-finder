@@ -151,6 +151,7 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: var(--dark);
 }
 
 /* width */

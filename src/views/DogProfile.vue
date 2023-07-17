@@ -181,11 +181,12 @@ const [lowerWeight, upperWeight] = weightRangeInInches.split('-').map((value) =>
 
 <style scoped>
 .go-back {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   margin-bottom: 2rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  color: var(--dark);
 }
 
 .go-back:hover {
