@@ -1,5 +1,6 @@
 <template>
   <label for="custom-dropdown" hidden>Search dog by breed</label>
+
   <div class="custom-dropdown" role="listbox" aria-labelledby="custom-dropdown-label" tabindex="0">
     <button
       id="custom-dropdown-button"
@@ -32,7 +33,7 @@
         aria-selected="false"
         v-for="(item, index) in breedList"
         :key="index"
-        :class="{'active-breed': item.name === breed}"
+        :class="{ 'active-breed': item.name === breed }"
         @click="getBreed(item.name)"
       >
         {{ item.name }}
@@ -51,6 +52,7 @@ import { storeToRefs } from 'pinia'
 const store = useDogDataStore()
 const { dataList } = storeToRefs(store)
 const { breedList } = storeToRefs(store)
+const { errorNote } = storeToRefs(store)
 
 const showDropdown = ref(false)
 const fetchingData = ref(false)
@@ -73,7 +75,6 @@ async function getBreedList() {
     breedList.value = response.data
   } catch (error) {
     console.error(error)
-
     fetchingMessage.value = 'Failed to get breeds'
   } finally {
     fetchingData.value = false
@@ -97,6 +98,9 @@ function searchBreed() {
 
   dataList.value = searchResults.value
   console.log(dataList.value)
+  if (dataList.value.length === 0) {
+    errorNote.value = 'Oops! No result found for the breed you searched for.'
+  }
 }
 onMounted(() => {
   getBreedList()
@@ -108,6 +112,7 @@ onMounted(() => {
   position: relative;
   padding: 0 1rem;
   margin-bottom: 2rem;
+  width: 100%;
 }
 
 .custom-dropdown ul {

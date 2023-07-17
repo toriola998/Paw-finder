@@ -1,6 +1,11 @@
 <template>
+  <EmptyState v-if="errorNote" :note="errorNote">
+    <div class="return-home">
+      <button @click="returnHome()" class="btn">Return Home</button>
+    </div>
+  </EmptyState>
   <loading-spinner v-if="fetchingData && dataList.length === 0" />
-  <div v-if="dataList.length > 0">
+  <div v-if="dataList.length > 0 && !errorNote">
     <select-dropdown></select-dropdown>
     <ul class="image-wrapper">
       <li v-for="(item, index) in dataList" :key="index">
@@ -13,6 +18,7 @@
 </template>
 
 <script setup>
+import EmptyState from './EmptyState.vue'
 import { onMounted } from 'vue'
 import { useDogDataStore } from '@/stores/index'
 import { storeToRefs } from 'pinia'
@@ -23,12 +29,17 @@ import SelectDropdown from './SelectDropdown.vue'
 
 const store = useDogDataStore()
 const { getData } = store
+const { errorNote } = storeToRefs(store)
 const { dataList } = storeToRefs(store)
 const { fetchingData } = storeToRefs(store)
 
 onMounted(() => {
   getData()
 })
+
+function returnHome() {
+  return dataList
+}
 </script>
 
 <style scoped>
@@ -36,7 +47,7 @@ onMounted(() => {
   display: grid;
   justify-content: center;
   row-gap: 1.5rem;
-  padding: 0 1rem;
+  padding: 0 1rem 10rem;
 }
 
 .dog-image {
@@ -49,6 +60,15 @@ onMounted(() => {
 .dog-image:hover {
   cursor: pointer;
   transform: scale(0.9);
+}
+
+.return-home {
+  display: flex;
+  justify-content: center;
+}
+
+.return-home button {
+  background-color: var(--dark-1);
 }
 
 @media screen and (min-width: 760px) {

@@ -14,10 +14,10 @@
           :class="{ gray: isGray, sepia: isSepia }"
         />
         <div class="btn-wrapper">
-          <button>Cartoonify</button>
-          <button @click="applyGrayscale()">Grayscale</button>
-          <button @click="applySepia()">Sepia</button>
-          <button @click="reset()">
+          <button class="btn">Cartoonify</button>
+          <button @click="applyGrayscale()" class="btn">Grayscale</button>
+          <button @click="applySepia()" class="btn">Sepia</button>
+          <button @click="reset()" class="btn">
             <img src="@/assets/images/icon-reset.png" alt="Reset image effects" width="25" />
             Reset
           </button>
@@ -232,20 +232,6 @@ const [lowerWeight, upperWeight] = weightRangeInInches.split('-').map((value) =>
   flex-wrap: wrap;
   gap: 1rem;
   margin-top: 2rem;
-}
-
-.btn-wrapper button {
-  padding: 0.7rem 2.3rem;
-  display: flex;
-  align-items: center;
-  height: 3rem;
-  border-radius: 5px;
-  transition: all 0.5s;
-  color: var(--light);
-}
-
-.btn-wrapper button:hover {
-  transform: scale(0.93);
 }
 
 .btn-wrapper button:nth-child(2) {
