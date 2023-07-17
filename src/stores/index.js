@@ -13,6 +13,7 @@ export const useDogDataStore = defineStore('dogData', () => {
   let breedList = ref(useLocalStorage('breedList', []))
 
   const fetchingData = ref(true)
+  const errorNote = ref('')
 
   async function getData() {
     fetchingData.value = true
@@ -22,9 +23,11 @@ export const useDogDataStore = defineStore('dogData', () => {
       console.log(dataList.value)
     } catch (error) {
       console.error(error)
+      errorNote.value = 'Oops! Something seems wrong, reload or try again.'
+      errorImage.value = 'icon-error.png'
     } finally {
       fetchingData.value = false
     }
   }
-  return { getData, dataList, fetchingData, breedList }
+  return { getData, dataList, fetchingData, breedList, errorNote }
 })

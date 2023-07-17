@@ -24,6 +24,7 @@ button {
 
 :root {
   --dark: #000;
+  --dark-1: #343a40;
   --light: #ffffff;
   --primary: #9f5b2e;
   --blue: #2a5d92;
@@ -37,4 +38,17 @@ ul {
 .container {
   max-width: 1300px;
   margin: 0 auto;
+}
+
+.btn {
+  padding: 0.7rem 2.3rem;
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  border-radius: 5px;
+  transition: all 0.5s;
+  color: var(--light);
+}
+.btn:hover {
+  transform: scale(0.93);
 }
