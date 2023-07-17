@@ -98,7 +98,7 @@ function searchBreed() {
 
   if (searchResults.value.length === 0) {
     errorNote.value = 'Oops! No result found for the breed you searched for.'
-  }else {
+  } else {
     dataList.value = searchResults.value
   }
   console.log(dataList.value)
@@ -161,17 +161,17 @@ onMounted(() => {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--primary); 
+  background: var(--primary);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--dark-1); 
+  background: var(--dark-1);
 }
 
 @media screen and (min-width: 700px) {

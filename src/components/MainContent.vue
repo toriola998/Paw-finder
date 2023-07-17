@@ -22,7 +22,7 @@ import EmptyState from './EmptyState.vue'
 import { onMounted } from 'vue'
 import { useDogDataStore } from '@/stores/index'
 import { storeToRefs } from 'pinia'
-import { RouterLink} from 'vue-router'
+import { RouterLink } from 'vue-router'
 import { useRouter } from 'vue-router'
 
 import LoadingSpinner from '../components/LoadingSpinner.vue'
@@ -41,7 +41,7 @@ onMounted(() => {
 })
 
 function returnHome() {
-  dataList.value = duplicateDataList.value;
+  dataList.value = duplicateDataList.value
   router.go(0)
 }
 </script>
